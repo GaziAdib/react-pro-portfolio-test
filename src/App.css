@@ -15,15 +15,15 @@
 }
 
 .my-image {
-    height: 350px;
+    height: 400px;
     width: 400px;
 }
 
 .my-image img {
     text-align: center;
-    height: 349px;
+    height: 400px;
     width: 400px;
-    border-radius: 10px; 
+    border-radius: 100%; 
 }
 
 

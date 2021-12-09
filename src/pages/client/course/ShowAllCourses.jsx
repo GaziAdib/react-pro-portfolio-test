@@ -17,7 +17,7 @@ const ShowAllCourses = () => {
 
         //const dbRef = ref(database, 'courses');
 
-        async function fetchCourses() {
+        const fetchCourses = async () => {
             const courseRef = ref(database, "courses");
             const courseQuery = query(courseRef, orderByKey());
 
@@ -42,7 +42,7 @@ const ShowAllCourses = () => {
 
     return (
         <>
-            <h2>Read All Courses Data</h2>
+            <h2 style={{textAlign: 'center'}}>Read All Courses Data</h2>
 
            <Container style={{ backgroundColor: '#e8f4f8', borderRadius: '10px' }}>
                 <Grid container spacing={1} justifyContent="center">

@@ -8,6 +8,8 @@ import { Container } from '@mui/material'
 
 
 
+
+
 const ShowAllProjects = () => {
 
     
@@ -18,18 +20,21 @@ const ShowAllProjects = () => {
 
         //const dbRef = ref(database, 'projects');
 
-        async function fetchProjects() {
+        const fetchProjects = async () => {
             const projectRef = ref(database, "projects");
             const projectQuery = query(projectRef, orderByKey());
 
             const snapshot = await get(projectQuery);
+        
             setLoading(false);
-
             if (snapshot.exists()) {
                 console.log(snapshot.val())
+               
                 setProjects((prevProjects) => {
                     return [...prevProjects, ...Object.values(snapshot.val())];
                 });
+                console.log(projects)
+              
                 
             } else {
                 console.log("Data Doesnot Exist!")
@@ -43,19 +48,21 @@ const ShowAllProjects = () => {
 
     return (
         <div>
-            <h2>Read All Projects Data</h2>
+            <h2 style={{textAlign: 'center'}}>Read All Projects Data</h2>
 
            <Container style={{ backgroundColor: '#e8f4f8', borderRadius: '10px' }}>
             <Grid container spacing={1} justifyContent="center">
 
-                    {
-                    projects.map((project) => {
-                            return  <Grid item xs={12} md={4} lg={4} sm={12}>
+                    {projects.length > 0 ? (
+                         projects.map((project) => {
+                            return  <Grid item xs={12} md={4} lg={4} sm={12} key={project.id}>
                                 <ProjectCard project={project}/>
                             </Grid>
                         })
-                    }
-
+                   
+                    ) : (<h2>No Data In Database</h2>)
+                   
+                }
     
 
     
@@ -64,6 +71,7 @@ const ShowAllProjects = () => {
 
         
         </div>
+        
     )
 }
 

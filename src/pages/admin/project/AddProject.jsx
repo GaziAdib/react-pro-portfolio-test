@@ -9,9 +9,16 @@ import { getDownloadURL, ref, uploadBytes } from '@firebase/storage';
 import { database } from '../../../firebase';
 import {ref as dbRef, set, push } from '@firebase/database';
 
+// import UUID
+
+import { v4 as uuidv4 } from 'uuid'
+
+
 
 
 const AddProject = () => {
+
+    var id = uuidv4()
 
     var urlImage;
 
@@ -30,9 +37,10 @@ const AddProject = () => {
         e.preventDefault() 
      
         const  InsertData =  () => {
-            const projectListRef = dbRef(database, 'projects');
-            const newProjectRef = push(projectListRef);
+            const projectListRef = dbRef(database, '/projects');
+            const newProjectRef = push(projectListRef)
             set(newProjectRef, {
+                id: uuidv4(),
                 projectImageUrl: pUrl,
                 projectTitle: projectTitle,
                 projectTag: projectTag,
@@ -48,6 +56,21 @@ const AddProject = () => {
         }
 
     InsertData()
+
+    const clearData = () => {
+       
+        setProjectTitle('')
+        setProjectImageUrl('')
+        setProjectTag('')
+        setProjectDescription('')
+        setProjectVideoLink('')
+        setProjectGitLink('')
+        setProjectDemoLink('')
+      
+    }
+
+    clearData()
+
     }
 
     const fileHandler = async (e) => {
